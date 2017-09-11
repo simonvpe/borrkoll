@@ -36,6 +36,7 @@ class Filters extends Component {
       }
       return (
         <TouchableOpacity
+	  key={filter.name}
           style={style}
           onPress={filter.action}>
           <Text style={styles.text}>{capitalize(filter.name)}</Text>
