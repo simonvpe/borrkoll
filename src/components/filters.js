@@ -30,18 +30,15 @@ class Filters extends Component {
       {name: VisibilityFilters.COMPLETED, action: showCompleted},
       {name: VisibilityFilters.INCOMPLETE, action: showIncomplete}
     ].map(filter => {
-      var style = [styles.button];
-      if (activeFilter === filter.name) {
-        style.push(styles.current);
-      }
-      return (
-        <TouchableOpacity
-	  key={filter.name}
-          style={style}
-          onPress={filter.action}>
-          <Text style={styles.text}>{capitalize(filter.name)}</Text>
-        </TouchableOpacity>
-      )
+	var style = [styles.button];
+	if (activeFilter === filter.name) {
+	    style.push(styles.current);
+	}
+	return (
+            <TouchableOpacity key={filter.name} style={style} onPress={filter.action}>
+	        <Text style={styles.text}>{capitalize(filter.name)}</Text>
+            </TouchableOpacity>
+        );
     });
   }
 }
@@ -57,7 +54,6 @@ const styles = StyleSheet.create({
     flex: 1
   },
   text: {
-    flex: 1,
     color: '#fff',
     textAlign: 'center',
     fontWeight: 'bold'
