@@ -14,6 +14,7 @@ function capitalize (word) {
 
 class TitleBar extends Component {
     render() {
+	var {activeFilter, showModal} = this.props;
 	return (
 		<View style={styles.toolbar}>
 		<Text style={styles.button}></Text>

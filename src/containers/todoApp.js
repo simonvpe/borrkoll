@@ -48,9 +48,10 @@ class TodoApp extends Component {
           activeFilter={filter}
           {...bindActionCreators(visibilityActions, dispatch)} />
         <Modal
-          animated={true}
+          animationType={true}
           transparent={false}
           visible={addModalVisible}>
+          onRequestClose={() => {}}
           <AddTodo
             {...bindActionCreators(todoActions, dispatch)}
             {...bindActionCreators(addModalVisibilityActions, dispatch)}
