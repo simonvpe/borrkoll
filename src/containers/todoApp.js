@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Modal} from 'react-native';
+import {Platform, StyleSheet, View, Modal} from 'react-native';
 import {bindActionCreators, dispatch} from 'redux';
 import {Font} from 'expo';
 import * as todoActions from '../actions/todoActions';
@@ -45,7 +45,7 @@ class TodoApp extends Component {
 	  );
       }
     return (
-	<Container>
+        <Container paddingTop={ Platform.os === 'ios' ? 0 : 24}>
         <TitleBar
           activeFilter={filter}
         {...bindActionCreators(addModalVisibilityActions, dispatch)} />
