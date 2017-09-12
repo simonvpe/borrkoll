@@ -14,7 +14,7 @@ import Filters from '../components/filters';
 
 import store from '../store';
 
-import { Container } from 'native-base';
+import { Container, Content } from 'native-base';
 
 store.dispatch(todoActions.addTodo('Foo Bar'));
 store.dispatch(todoActions.addTodo('Hello World'));
@@ -32,6 +32,9 @@ store.dispatch(todoActions.addTodo('Hello World'));
   filter: state.filter,
   addModalVisible: state.addModal.visible
 }))
+
+
+
 class TodoApp extends Component {
   constructor(props) {
       super(props);
@@ -39,23 +42,28 @@ class TodoApp extends Component {
 
   render() {
       const {todos, filter, dispatch, addModalVisible} = this.props;
+
       if (!this.state || !this.state.fontLoaded) {
 	  return (
 	      <Container />
 	  );
       }
-    return (
-        <Container paddingTop={ Platform.os === 'ios' ? 0 : 24}>
-        <TitleBar
-          activeFilter={filter}
-        {...bindActionCreators(addModalVisibilityActions, dispatch)} />
-        <TodoList
-          activeFilter={filter}
-          todos={todos}
-          {...bindActionCreators(todoActions, dispatch)} />
+      /*
         <Filters
           activeFilter={filter}
           {...bindActionCreators(visibilityActions, dispatch)} />
+      */
+    return (
+      <Container paddingTop={ Platform.os === 'ios' ? 0 : 24}>
+        <TitleBar
+          activeFilter={filter}
+        {...bindActionCreators(addModalVisibilityActions, dispatch)} />
+	<Content>
+        <TodoList
+          activeFilter={filter}
+          todos={todos}
+        {...bindActionCreators(todoActions, dispatch)} />
+	</Content>
         <Modal
           animationType="slide"
           transparent={false}
