@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Modal} from 'react-native';
 import {bindActionCreators, dispatch} from 'redux';
+import {Font} from 'expo';
 import * as todoActions from '../actions/todoActions';
 import * as visibilityActions from '../actions/visibilityActions';
 import * as addModalVisibilityActions from '../actions/addModalVisibilityActions';
@@ -12,6 +13,9 @@ import AddTodo from '../components/add-todo';
 import Filters from '../components/filters';
 
 import store from '../store';
+
+import { Container } from 'native-base';
+
 store.dispatch(todoActions.addTodo('Foo Bar'));
 store.dispatch(todoActions.addTodo('Hello World'));
 
@@ -30,16 +34,21 @@ store.dispatch(todoActions.addTodo('Hello World'));
 }))
 class TodoApp extends Component {
   constructor(props) {
-    super(props);
+      super(props);
   }
 
   render() {
-    const {todos, filter, dispatch, addModalVisible} = this.props;
+      const {todos, filter, dispatch, addModalVisible} = this.props;
+      if (!this.state || !this.state.fontLoaded) {
+	  return (
+	      <Container />
+	  );
+      }
     return (
-      <View style={styles.container}>
+	<Container>
         <TitleBar
           activeFilter={filter}
-          {...bindActionCreators(addModalVisibilityActions, dispatch)} />
+        {...bindActionCreators(addModalVisibilityActions, dispatch)} />
         <TodoList
           activeFilter={filter}
           todos={todos}
@@ -58,9 +67,18 @@ class TodoApp extends Component {
             {...bindActionCreators(addModalVisibilityActions, dispatch)}
             />
         </Modal>
-      </View>
+      </Container>
     );
   }
+
+    
+  async componentDidMount() {
+    await Font.loadAsync({
+      'Roboto': require('native-base/Fonts/Roboto.ttf'),
+      'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+    });
+    this.setState({ fontLoaded: true });
+  }    
 }
 /*
 
