@@ -33,8 +33,8 @@ class TodoList extends Component {
         <Tabs>
 	    {[
 		{ name: VisibilityFilters.ALL }, 
-		{ name: VisibilityFilters.COMPLETED },
-		{ name: VisibilityFilters.INCOMPLETE }
+		{ name: VisibilityFilters.INCOMPLETE },
+		{ name: VisibilityFilters.COMPLETED }		
 	    ].map(filter => {
 		const heading = (
 	            <TabHeading>
