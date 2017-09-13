@@ -4,7 +4,12 @@ import {
     Body,
     CheckBox,
     Text,
-    ListItem
+    ListItem,
+    Card,
+    CardItem,
+    Header,
+    Right,
+    Left
 } from 'native-base';
 
 import {TodoState} from '../actions/todo-actions';
@@ -13,14 +18,17 @@ class TodoListItem extends Component {
     render() {
 	const { todo, completeTodo, incompleteTodo } = this.props;
 	return (
-	    <ListItem key={"li-"+todo.id}>
-	        <CheckBox key={todo.id} checked={TodoState.COMPLETED == todo.state}
-	                  onPress={() => TodoState.COMPLETED == todo.state
-			      ? incompleteTodo(todo.id)
-		              : completeTodo(todo.id)} />
-		<Body key={"body-"+todo.id}>
-		    <Text key={"text-"+todo.id}>{todo.name}</Text>
-		</Body>
+	    <ListItem>
+		<Card key={"li-"+todo.id}>
+		    <CardItem header>
+              		<Text>{todo.name}</Text>
+		    </CardItem>
+		    <CardItem key={"body-"+todo.id}>
+		        <Body>
+		            <Text key={"text-"+todo.id}>{todo.address}</Text>
+		        </Body>
+		    </CardItem>
+	        </Card>
 	    </ListItem>
 	);
     }
