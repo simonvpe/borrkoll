@@ -1,4 +1,4 @@
-import * as actions from './actionTypes';
+import * as actions from './action-types';
 
 export function showModal() {
   return {

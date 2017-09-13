@@ -1,4 +1,4 @@
-import * as actions from './actionTypes';
+import * as actions from './action-types';
 import _ from 'lodash';
 
 export function addTodo(name, completed) {

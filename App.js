@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 import {Provider} from 'react-redux';
 import configureStore from './src/store';
-import TodoApp from './src/containers/todoApp';
+import TodoApp from './src/containers/todo-app';
 
 export default class App extends Component {
     render() {

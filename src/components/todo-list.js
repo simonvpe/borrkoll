@@ -24,7 +24,7 @@ import {
 
 import CompleteToggle from './complete-toggle';
 import AddTodoRow from './add-todo-row';
-import {VisibilityFilters} from '../actions/actionTypes';
+import {VisibilityFilters} from '../actions/action-types';
 
 class TodoList extends Component {
   render() {

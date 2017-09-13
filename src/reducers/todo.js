@@ -1,6 +1,6 @@
 'use strict';
 
-import * as actions from '../actions/actionTypes';
+import * as actions from '../actions/action-types';
 import _ from 'lodash';
 
 export default function todosReducer (todos = [], action = {}) {

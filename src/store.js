@@ -3,7 +3,7 @@ import {logger} from 'redux-logger';
 import {reducers} from './reducers';
 import thunk from 'redux-thunk'
 
-import * as actions from './actions/actionTypes';
+import * as actions from './actions/action-types';
 import createFirebaseMiddleware from './middleware/firebase';
 
 export default function configureStore() {

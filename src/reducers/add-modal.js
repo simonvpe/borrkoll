@@ -1,6 +1,6 @@
 'use strict';
 
-import * as actions from '../actions/actionTypes';
+import * as actions from '../actions/action-types';
 
 const initialState = {
   visible: false
