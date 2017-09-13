@@ -2,9 +2,9 @@ export const ADD = 'ADD';
 export const REMOVE = 'REMOVE';
 export const COMPLETE = 'COMPLETE';
 export const INCOMPLETE = 'INCOMPLETE';
+export const CHANGED = 'CHANGED';
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 export const SET_ADD_MODAL_VISIBILITY = 'SET_ADD_MODAL_VISIBILITY';
-export const FETCH_TODOS = 'FETCH_TODOS';
 
 export const VisibilityFilters = {
   ALL: 'ALL',

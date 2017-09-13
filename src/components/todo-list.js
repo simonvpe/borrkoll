@@ -37,26 +37,27 @@ class TodoList extends Component {
 		{ name: VisibilityFilters.COMPLETED }		
 	    ].map(filter => {
 		const heading = (
-	            <TabHeading>
+		    <TabHeading key={filter.name}>
 			<Text>{filter.name}</Text>
 		    </TabHeading>
 		);
 		return (
-		    <Tab key={filter.name} heading={heading}>
-			<List>
+		    <Tab key={"tab-"+filter.name} heading={heading}>
+			<List key={"l-"+filter.name}>
 			{this.props.todos.map(todo => {
 			    if(todo.completed && filter.name == VisibilityFilters.COMPLETED
 			       || !todo.completed && filter.name == VisibilityFilters.INCOMPLETE
 			       || filter.name == VisibilityFilters.ALL) {
 			        return (
-				    <ListItem key={todo.name}>
+				    <ListItem key={"li-"+todo.name}>
 					<CheckBox
+                                            key={"cb-"+todo.name}
 				            checked={todo.completed}
 				            onPress={() => todo.completed ?
 					        incompleteTodo(todo.id) :
 					        completeTodo(todo.id)}
 					    />
-					<Body>
+					<Body key={"body-"+todo.name}>
 					    <Text>{todo.name}</Text>
 					</Body>
    				    </ListItem>

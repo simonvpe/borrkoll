@@ -15,10 +15,18 @@ const ref = db.ref('/test-todos-1')
 
 export function fetchTodos() {
     return dispatch => {
-	ref.on('value', snapshot => {
+
+	ref.on('child_added', snapshot => {
 	    dispatch({
-		type: actions.FETCH_TODOS,
-		payload: snapshot.val()
+		type: actions.ADD,
+		payload: Object.assign({id: snapshot.key}, snapshot.val())
+	    });
+	});
+
+	ref.on('child_changed', snapshot => {
+	    dispatch({
+		type: actions.CHANGED,
+		payload: Object.assign({id: snapshot.key}, snapshot.val())
 	    });
 	});
     }
@@ -32,14 +40,12 @@ export function addTodo(name, completed) {
 }
 
 export function completeTodo(id) {
-    console.log("Completing " + id);
     updates = {}
     updates['/test-todos-1/' + id + '/completed'] = true
     return dispatch => db.ref().update(updates);
 }
 
 export function incompleteTodo(id) {
-    console.log("Completing " + id);
     updates = {}
     updates['/test-todos-1/' + id + '/completed'] = false
     return dispatch => db.ref().update(updates);
