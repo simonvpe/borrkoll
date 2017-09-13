@@ -1,29 +1,34 @@
 import * as actions from './action-types';
 import _ from 'lodash';
 
+export const TodoState = Object.freeze({
+    POOL:      "POOL",
+    ONGOING:   "ONGOING",
+    COMPLETED: "COMPLETED"
+});
+
 export function addTodo(name, completed) {
     return {
 	type: actions.ADD,
 	payload: {
 	    name: name,
-	    completed: completed === true
+	    state: TodoState.POOL
 	}
     };
 }
 
-export function completeTodo(id) {
+export function setTodoState(id, state) {
     return {
 	type: actions.CHANGE,
 	id: id,
-	payload: {completed: true}
+	payload: {state: state}
     };
+}
+
+export function completeTodo(id) {
+    return setTodoState(id, TodoState.COMPLETED);
 }
 
 export function incompleteTodo(id) {
-    return {
-	type: actions.CHANGE,
-	id: id,
-	payload: {completed: false}
-    };
+    return setTodoState(id, TodoState.POOL);
 }
-

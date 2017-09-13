@@ -23,8 +23,8 @@ import {
 } from 'native-base';
 
 import CompleteToggle from './complete-toggle';
-import AddTodoRow from './add-todo-row';
 import {VisibilityFilters} from '../actions/action-types';
+import {TodoState} from '../actions/todo-actions';
 import TodoListItem from './todo-list-item';
 
 class TodoList extends Component {
@@ -32,23 +32,17 @@ class TodoList extends Component {
     var {completeTodo, incompleteTodo} = this.props;
     return (
         <Tabs>
-	    {[
-		{ name: VisibilityFilters.ALL }, 
-		{ name: VisibilityFilters.INCOMPLETE },
-		{ name: VisibilityFilters.COMPLETED }		
-	    ].map(filter => {
+	    {[ TodoState.POOL, TodoState.ONGOING, TodoState.COMPLETED ].map(filter => {
 		const heading = (
-		    <TabHeading key={filter.name}>
-			<Text>{filter.name}</Text>
+		    <TabHeading key={filter}>
+			<Text>{filter}</Text>
 		    </TabHeading>
 		);
 		return (
-		    <Tab key={"tab-"+filter.name} heading={heading}>
-			<List key={"l-"+filter.name}>
+		    <Tab key={"tab-"+filter} heading={heading}>
+			<List key={"l-"+filter}>
 			{this.props.todos.map(todo => {
-			    if(todo.completed && filter.name == VisibilityFilters.COMPLETED
-			       || !todo.completed && filter.name == VisibilityFilters.INCOMPLETE
-			       || filter.name == VisibilityFilters.ALL) {
+			    if(todo.state && todo.state === filter) {
 			        return (
     				    <TodoListItem key={"todo-list-item-"+todo.id}
 				                  todo={todo}
