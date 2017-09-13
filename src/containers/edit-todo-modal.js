@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {Modal} from 'react-native';
 import {TodoState} from '../actions/todo-actions';
 import update from 'immutability-helper'
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+
 import {
     Container,
     Content,
@@ -103,9 +105,37 @@ class EditTodoModal extends Component {
 	                    </Item>
 		
 		            <Item stackedLabel last>
-		                <Label>Address</Label>
-                                <Input value={address()} onChangeText={setAddress} />
-	                    </Item>
+		                <GooglePlacesAutocomplete
+    	                            placeholder="Search"
+    	                            minLength={2}
+                                    autoFocus={false}
+                                    returnKeyType={'search'}
+    	                            listViewDisplayed='auto'
+	                            fetchDetails={true}
+	                            renderDescription={(row) => row.description}
+	                            getDefaultValue={() => {return ''}}
+	                            query={{
+					key: "AIzaSyBnyslwKBULreEbF3qbI8GKhv3cYYzDnic",
+		    			language: "en",
+				    }}
+	                            styles={{
+					description: { fontWeight: 'bold' },
+					predefinedPlacesDescription: { color: '#1faadb' }
+				    }}
+	                            currentLocation={true}
+	                            currentLocationLabel="Current location"
+	                            GoogleReverseGeocodingQuery={{
+				    }}
+	                            GooglePlacesSearchQuery={{
+					rankby: 'distance',
+					types: 'food'
+				    }}
+	                            filterReverseGeocodingByTypes={[
+					'locality',
+					'administrative_area_level_3'
+				    ]}
+	                            debounce={200} />
+		            </Item>
 		
 		            <Picker stackedLabel
 	                        mode="dropdown"
