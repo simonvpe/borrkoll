@@ -10,7 +10,6 @@ import {connect} from 'react-redux';
 import TitleBar from '../components/title-bar';
 import TodoList from '../components/todo-list';
 import AddTodo from '../components/add-todo';
-import Filters from '../components/filters';
 
 import store from '../store';
 
