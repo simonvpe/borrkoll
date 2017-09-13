@@ -81,27 +81,5 @@ class TodoApp extends Component {
     this.setState({ fontLoaded: true });
   }    
 }
-/*
-
-<AddTodo
-style={styles.add}
-{...bindActionCreators(todoActions, dispatch)} />
- */
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center'
-  },
-  title: {
-
-  },
-  list: {
-    flex: 1
-  },
-  add: {
-    flex: 1
-  }
-})
 
 export default TodoApp;
