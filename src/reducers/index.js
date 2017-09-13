@@ -2,8 +2,10 @@
 
 import todoReducer from './todo';
 import addModalReducer from './add-modal';
+import editModalReducer from './edit-modal';
 
 export const reducers = {
-  todos: todoReducer,
-  addModal: addModalReducer
+    todos: todoReducer,
+    editModal: editModalReducer,
+    addModal: addModalReducer
 };

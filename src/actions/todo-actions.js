@@ -25,10 +25,10 @@ export function setTodoState(id, state) {
     };
 }
 
-export function completeTodo(id) {
-    return setTodoState(id, TodoState.COMPLETED);
-}
-
-export function incompleteTodo(id) {
-    return setTodoState(id, TodoState.POOL);
+export function updateTodo(id, name, address, state) {
+    return {
+	type: actions.CHANGE,
+	id: id,
+	payload: { name, address, state	}
+    };
 }

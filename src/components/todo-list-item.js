@@ -9,20 +9,30 @@ import {
     CardItem,
     Header,
     Right,
-    Left
+    Left,
+    Button,
+    Icon
 } from 'native-base';
 
 import {TodoState} from '../actions/todo-actions';
 
 class TodoListItem extends Component {
     render() {
-	const { todo, completeTodo, incompleteTodo } = this.props;
+	const { todo, showEditModal } = this.props;
 	return (
 	    <ListItem>
 		<Card key={"li-"+todo.id}>
-		    <CardItem header>
-              		<Text>{todo.name}</Text>
-		    </CardItem>
+		    <CardItem>
+	                <Left>
+	                    <Text>{todo.name}</Text>
+	                </Left>
+                        <Body />
+	                <Right>
+	                    <Button transparent onPress={showEditModal}>
+	                        <Icon name="md-arrow-forward" />
+	                    </Button>
+	                </Right>
+	            </CardItem>
 		    <CardItem key={"body-"+todo.id}>
 		        <Body>
 		            <Text key={"text-"+todo.id}>{todo.address}</Text>

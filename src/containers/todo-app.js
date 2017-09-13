@@ -4,18 +4,31 @@ import {bindActionCreators, dispatch} from 'redux';
 import {Font} from 'expo';
 import * as todoActions from '../actions/todo-actions';
 import * as addModalVisibilityActions from '../actions/add-modal-visibility-actions';
+import * as editModalVisibilityActions from '../actions/edit-modal-visibility-actions';
 import {connect} from 'react-redux';
 import TitleBar from '../components/title-bar';
 import TodoList from '../components/todo-list';
 import AddTodo from '../components/add-todo';
+import EditTodoModal from './edit-todo-modal';
 
 import store from '../store';
 
-import { Container, Content } from 'native-base';
+import {
+    Container,
+    Content,
+    Header,
+    Text,
+    Left,
+    Right,
+    Button,
+    Icon,
+    Body
+} from 'native-base';
 
 @connect(state => ({
     todos: state.todos,
-    addModalVisible: state.addModal.visible
+    addModalVisible: state.addModal.visible,
+    editModal: state.editModal
 }))
 
 
@@ -25,7 +38,7 @@ class TodoApp extends Component {
   }
 
   render() {
-      const {todos, dispatch, addModalVisible} = this.props;
+      const {todos, dispatch, addModalVisible, editModal} = this.props;
 
       if (!this.state || !this.state.fontLoaded) {
 	  return (
@@ -37,10 +50,17 @@ class TodoApp extends Component {
         <TitleBar
         {...bindActionCreators(addModalVisibilityActions, dispatch)} />
 	<Content>
-        <TodoList
-          todos={todos}
-        {...bindActionCreators(todoActions, dispatch)} />
+            <TodoList
+                todos={todos}
+		{...bindActionCreators(todoActions, dispatch)}
+		{...bindActionCreators(editModalVisibilityActions, dispatch)} />
+	    <EditTodoModal
+	        todos={todos}
+	        editModal={editModal}
+		{...bindActionCreators(todoActions, dispatch)}
+	        {...bindActionCreators(editModalVisibilityActions, dispatch)} />
 	</Content>
+	  
         <Modal
           animationType="slide"
           transparent={false}
@@ -51,7 +71,7 @@ class TodoApp extends Component {
             {...bindActionCreators(todoActions, dispatch)}
             {...bindActionCreators(addModalVisibilityActions, dispatch)}
             />
-        </Modal>
+          </Modal>
       </Container>
     );
   }

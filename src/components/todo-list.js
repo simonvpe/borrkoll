@@ -29,8 +29,8 @@ import TodoListItem from './todo-list-item';
 
 class TodoList extends Component {
   render() {
-    var {completeTodo, incompleteTodo} = this.props;
-    return (
+      var {completeTodo, incompleteTodo, editModal, showEditModal} = this.props;
+      return (
         <Tabs>
 	    {[ TodoState.POOL, TodoState.ONGOING, TodoState.COMPLETED ].map(filter => {
 		const heading = (
@@ -47,7 +47,8 @@ class TodoList extends Component {
     				    <TodoListItem key={"todo-list-item-"+todo.id}
 				                  todo={todo}
 				                  completeTodo={completeTodo}
-				                  incompleteTodo={incompleteTodo} />
+				                  incompleteTodo={incompleteTodo}
+				                  showEditModal={() => showEditModal(todo.id)} />
 				);
 			    }
 			    })}

@@ -21,9 +21,11 @@
   "dependencies": {
     "expo": "^20.0.0",
     "firebase": "^4.3.1",
+    "immutability-helper": "^2.3.1",
     "native-base": "^2.3.1",
     "react": "16.0.0-alpha.12",
     "react-native": "^0.47.0",
+    "react-native-geocoding": "^0.2.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
