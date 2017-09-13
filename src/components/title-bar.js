@@ -29,7 +29,7 @@ function capitalize (word) {
 
 class TitleBar extends Component {
     render() {
-	var {activeFilter, showModal} = this.props;
+	var {showModal} = this.props;
 	return (
 	    <Header>
 	        <Left>

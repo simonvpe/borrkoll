@@ -3,9 +3,7 @@ import {Platform, StyleSheet, View, Modal} from 'react-native';
 import {bindActionCreators, dispatch} from 'redux';
 import {Font} from 'expo';
 import * as todoActions from '../actions/todo-actions';
-import * as visibilityActions from '../actions/visibility-actions';
 import * as addModalVisibilityActions from '../actions/add-modal-visibility-actions';
-import {VisibilityFilters} from '../actions/action-types';
 import {connect} from 'react-redux';
 import TitleBar from '../components/title-bar';
 import TodoList from '../components/todo-list';
@@ -15,22 +13,10 @@ import store from '../store';
 
 import { Container, Content } from 'native-base';
 
-//store.dispatch(todoActions.fetchTodos());
-
 @connect(state => ({
-  todos: state.todos.filter(todo => {
-    if (state.filter === VisibilityFilters.ALL) {
-      return true;
-    } else if (state.filter === VisibilityFilters.COMPLETED) {
-      return todo.completed;
-    } else if (state.filter === VisibilityFilters.INCOMPLETE) {
-      return !todo.completed;
-    }
-  }),
-  filter: state.filter,
-  addModalVisible: state.addModal.visible
+    todos: state.todos,
+    addModalVisible: state.addModal.visible
 }))
-
 
 
 class TodoApp extends Component {
@@ -39,7 +25,7 @@ class TodoApp extends Component {
   }
 
   render() {
-      const {todos, filter, dispatch, addModalVisible} = this.props;
+      const {todos, dispatch, addModalVisible} = this.props;
 
       if (!this.state || !this.state.fontLoaded) {
 	  return (
@@ -49,11 +35,9 @@ class TodoApp extends Component {
       return (
       <Container paddingTop={ Platform.os === 'ios' ? 0 : 24}>
         <TitleBar
-          activeFilter={filter}
         {...bindActionCreators(addModalVisibilityActions, dispatch)} />
 	<Content>
         <TodoList
-          activeFilter={filter}
           todos={todos}
         {...bindActionCreators(todoActions, dispatch)} />
 	</Content>
