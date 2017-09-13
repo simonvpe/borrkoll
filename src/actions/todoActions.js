@@ -35,21 +35,13 @@ export function completeTodo(id) {
     console.log("Completing " + id);
     updates = {}
     updates['/test-todos-1/' + id + '/completed'] = true
-    db.ref().update(updates);
-  return {
-    type: actions.COMPLETE,
-    id: id
-  };
+    return dispatch => db.ref().update(updates);
 }
 
 export function incompleteTodo(id) {
     console.log("Completing " + id);
     updates = {}
     updates['/test-todos-1/' + id + '/completed'] = false
-    db.ref().update(updates);
-  return {
-    type: actions.INCOMPLETE,
-    id: id
-  };
+    return dispatch => db.ref().update(updates);
 }
 
