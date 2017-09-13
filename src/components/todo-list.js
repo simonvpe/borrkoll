@@ -50,7 +50,8 @@ class TodoList extends Component {
 			       || !todo.completed && filter.name == VisibilityFilters.INCOMPLETE
 			       || filter.name == VisibilityFilters.ALL) {
 			        return (
-				    <TodoListItem todo={todo}
+    				    <TodoListItem key={"todo-list-item-"+todo.id}
+				                  todo={todo}
 				                  completeTodo={completeTodo}
 				                  incompleteTodo={incompleteTodo} />
 				);
