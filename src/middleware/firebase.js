@@ -4,7 +4,10 @@ import firebase from 'firebase';
 export default createFirebaseMiddleware =
     (ref, config, actions) => store => next => {
 
-	const connection = firebase.initializeApp(config).database();
+	const connection = !firebase.apps.length
+	      ? firebase.initializeApp(config).database()
+	      : firebase.app().database();
+	
 	const db = connection.ref(ref);
 
 	db.on('child_added', snapshot => {
@@ -22,8 +25,8 @@ export default createFirebaseMiddleware =
 	});
 
 	return action => {
-	    // Hijack add action, send off to firebase db, let 'child_added'
-	    // handle update
+	    // Hijack add action, send off to firebase db, let
+	    // 'child_added'/'child_changed' handle update
 	    switch(action.type) {
 		
 	    case actions.add:
