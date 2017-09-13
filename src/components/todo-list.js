@@ -25,6 +25,7 @@ import {
 import CompleteToggle from './complete-toggle';
 import AddTodoRow from './add-todo-row';
 import {VisibilityFilters} from '../actions/action-types';
+import TodoListItem from './todo-list-item';
 
 class TodoList extends Component {
   render() {
@@ -49,18 +50,9 @@ class TodoList extends Component {
 			       || !todo.completed && filter.name == VisibilityFilters.INCOMPLETE
 			       || filter.name == VisibilityFilters.ALL) {
 			        return (
-				    <ListItem key={"li-"+todo.name}>
-					<CheckBox
-                                            key={"cb-"+todo.name}
-				            checked={todo.completed}
-				            onPress={() => todo.completed ?
-					        incompleteTodo(todo.id) :
-					        completeTodo(todo.id)}
-					    />
-					<Body key={"body-"+todo.name}>
-					    <Text>{todo.name}</Text>
-					</Body>
-   				    </ListItem>
+				    <TodoListItem todo={todo}
+				                  completeTodo={completeTodo}
+				                  incompleteTodo={incompleteTodo} />
 				);
 			    }
 			    })}
