@@ -1,0 +1,23 @@
+import _ from 'lodash';
+import firebase from 'firebase';
+
+export default function createFirebaseMiddleware =
+    (ref, config, actions) => store => next => action => {
+	
+	const db = firebase.initializeApp(config).database().ref(ref);
+
+	db.on('child_added', snapshot => {
+	    next({
+		type: actions.add,
+		payload: Object.assign({id: snapshot.key}, snapshot.val())
+	    });
+	});
+
+	db.on('child_changed', snapshot => {
+	    next({
+		type: actions.update,
+		payload: Object.assign({id: snapshot.key}, snapshot.val())
+	    });
+	});
+    
+}

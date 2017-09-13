@@ -12,7 +12,7 @@ export default function todosReducer (todos = [], action = {}) {
             action.payload
 	];
 	
-    case actions.CHANGED:
+    case actions.CHANGE:
 	var index = _.findIndex(todos, (todo) => todo.id === action.payload.id);
 	if (index === -1) {
             return todos;

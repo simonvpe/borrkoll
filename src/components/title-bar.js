@@ -38,7 +38,7 @@ class TitleBar extends Component {
 	            </Button>
 	        </Left>
 		<Body>
-		    <Title>{capitalize(activeFilter)}</Title>
+		    <Title>Borrkoll</Title>
 		</Body>
 		<Right>
                     <Button onPress={showModal}>

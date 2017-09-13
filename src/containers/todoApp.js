@@ -16,7 +16,7 @@ import store from '../store';
 
 import { Container, Content } from 'native-base';
 
-store.dispatch(todoActions.fetchTodos());
+//store.dispatch(todoActions.fetchTodos());
 
 @connect(state => ({
   todos: state.todos.filter(todo => {
@@ -47,12 +47,7 @@ class TodoApp extends Component {
 	      <Container />
 	  );
       }
-      /*
-        <Filters
-          activeFilter={filter}
-          {...bindActionCreators(visibilityActions, dispatch)} />
-      */
-    return (
+      return (
       <Container paddingTop={ Platform.os === 'ios' ? 0 : 24}>
         <TitleBar
           activeFilter={filter}

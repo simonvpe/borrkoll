@@ -1,53 +1,29 @@
 import * as actions from './actionTypes';
 import _ from 'lodash';
-import firebase from 'firebase';
-
-var config = {
-  apiKey: "AIzaSyBe7C-voSrwfiI5NYikJNl4F7lSx4SPcGQ",
-  authDomain: "borrkoll-bddd5.firebaseapp.com",
-  databaseURL: "https://borrkoll-bddd5.firebaseio.com",
-  projectId: "borrkoll-bddd5",
-  storageBucket: "borrkoll-bddd5.appspot.com",
-  messagingSenderId: "100876790754"
-};
-const db = firebase.initializeApp(config).database();
-const ref = db.ref('/test-todos-1')
-
-export function fetchTodos() {
-    return dispatch => {
-
-	ref.on('child_added', snapshot => {
-	    dispatch({
-		type: actions.ADD,
-		payload: Object.assign({id: snapshot.key}, snapshot.val())
-	    });
-	});
-
-	ref.on('child_changed', snapshot => {
-	    dispatch({
-		type: actions.CHANGED,
-		payload: Object.assign({id: snapshot.key}, snapshot.val())
-	    });
-	});
-    }
-}
 
 export function addTodo(name, completed) {
-    return dispatch => ref.push({
-	name: name,
-	completed: completed === true
-    });
+    return {
+	type: actions.ADD,
+	payload: {
+	    name: name,
+	    completed: completed === true
+	}
+    };
 }
 
 export function completeTodo(id) {
-    updates = {}
-    updates['/test-todos-1/' + id + '/completed'] = true
-    return dispatch => db.ref().update(updates);
+    return {
+	type: actions.CHANGE,
+	id: id,
+	payload: {completed: true}
+    };
 }
 
 export function incompleteTodo(id) {
-    updates = {}
-    updates['/test-todos-1/' + id + '/completed'] = false
-    return dispatch => db.ref().update(updates);
+    return {
+	type: actions.CHANGE,
+	id: id,
+	payload: {completed: false}
+    };
 }
 
