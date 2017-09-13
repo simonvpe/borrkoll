@@ -35,7 +35,7 @@ class TodoListItem extends Component {
 	            </CardItem>
 		    <CardItem key={"body-"+todo.id}>
 		        <Body>
-		            <Text key={"text-"+todo.id}>{todo.address}</Text>
+		            <Text key={"text-"+todo.id}>{""}</Text>
 		        </Body>
 		    </CardItem>
 	        </Card>

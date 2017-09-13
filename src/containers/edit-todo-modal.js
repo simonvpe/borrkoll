@@ -25,6 +25,49 @@ import {
 } from 'native-base';
 
 
+class PlacePicker extends Component {
+    render() {
+	const { address, setAddress } = this.props;
+	
+	return (
+		                <GooglePlacesAutocomplete
+    	                            placeholder="Location"
+    	                            minLength={2}
+                                    autoFocus={false}
+                                    returnKeyType={'search'}
+    	                            listViewDisplayed='auto'
+	                            fetchDetails={true}
+	                            renderDescription={(row) => row.description}
+	                            getDefaultValue={() => {return ''}}
+	                            query={{
+					key: "AIzaSyBnyslwKBULreEbF3qbI8GKhv3cYYzDnic",
+		    			language: "en",
+				    }}
+	                            styles={{
+					description: { fontWeight: 'bold' },
+					predefinedPlacesDescription: { color: '#1faadb' }
+				    }}
+	                            onPress={(data, details=null) => {
+					setAddress(data.description)
+				    }}
+	                            getDefaultValue={address}
+	                            currentLocation={false}
+	                            currentLocationLabel="Current location"
+	                            GoogleReverseGeocodingQuery={{
+				    }}
+	                            GooglePlacesSearchQuery={{
+					rankby: 'distance',
+					types: 'food'
+				    }}
+	                            filterReverseGeocodingByTypes={[
+					'locality',
+					'administrative_area_level_3'
+				    ]}
+	                            debounce={200} />
+	);
+    }
+}
+
 class EditTodoModal extends Component {
     constructor(props) {
 	super(props)
@@ -99,44 +142,6 @@ class EditTodoModal extends Component {
 		    </Header>
 		    <Content>
 		        <Form>
-		            <Item stackedLabel last>
-		                <Label>Name</Label>
-                                <Input value={name()} onChangeText={setName} />
-	                    </Item>
-		
-		            <Item stackedLabel last>
-		                <GooglePlacesAutocomplete
-    	                            placeholder="Search"
-    	                            minLength={2}
-                                    autoFocus={false}
-                                    returnKeyType={'search'}
-    	                            listViewDisplayed='auto'
-	                            fetchDetails={true}
-	                            renderDescription={(row) => row.description}
-	                            getDefaultValue={() => {return ''}}
-	                            query={{
-					key: "AIzaSyBnyslwKBULreEbF3qbI8GKhv3cYYzDnic",
-		    			language: "en",
-				    }}
-	                            styles={{
-					description: { fontWeight: 'bold' },
-					predefinedPlacesDescription: { color: '#1faadb' }
-				    }}
-	                            currentLocation={true}
-	                            currentLocationLabel="Current location"
-	                            GoogleReverseGeocodingQuery={{
-				    }}
-	                            GooglePlacesSearchQuery={{
-					rankby: 'distance',
-					types: 'food'
-				    }}
-	                            filterReverseGeocodingByTypes={[
-					'locality',
-					'administrative_area_level_3'
-				    ]}
-	                            debounce={200} />
-		            </Item>
-		
 		            <Picker stackedLabel
 	                        mode="dropdown"
 	                        placoholder="Select One"
@@ -147,6 +152,13 @@ class EditTodoModal extends Component {
 		                <Item label="Ongoing" value={TodoState.ONGOING} />
 		                <Item label="Completed" value={TodoState.COMPLETED} />		
 		            </Picker>
+		
+		            <Item inlineLabel last>
+		                <Label>Name</Label>
+                                <Input value={name()} onChangeText={setName} />
+	                    </Item>
+		
+		            <PlacePicker address={address} setAddress={setAddress} />
 		
 		            <Button full onPress={submit}>
 		                <Text>Submit</Text>
