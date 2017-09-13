@@ -16,8 +16,7 @@ import store from '../store';
 
 import { Container, Content } from 'native-base';
 
-store.dispatch(todoActions.addTodo('Foo Bar'));
-store.dispatch(todoActions.addTodo('Hello World'));
+store.dispatch(todoActions.fetchTodos());
 
 @connect(state => ({
   todos: state.todos.filter(todo => {

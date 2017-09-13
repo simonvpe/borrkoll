@@ -5,6 +5,13 @@ import _ from 'lodash';
 
 export default function todosReducer (todos = [], action = {}) {
   switch (action.type) {
+    case actions.FETCH_TODOS:
+      return Object.entries(action.payload).map(entry => {
+	  return Object.assign({},entry[1],{
+	      id: entry[0]
+	  });
+      })
+      return todos;
     case actions.ADD:
       return [
         ...todos,
